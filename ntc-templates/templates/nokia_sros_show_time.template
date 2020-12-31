@@ -1,0 +1,10 @@
+Value DayOfWeek (\w+)
+Value Month (\w+)
+Value MonthDay (\d+)
+Value Time (..:..:..)
+Value Timezone (\w+)
+Value Year (\d+)
+
+Start
+  ^${DayOfWeek}\s+${Month}\s+${MonthDay}\s+${Time}\s+${Timezone}\s+${Year} -> Record
+  ^ -> EOF

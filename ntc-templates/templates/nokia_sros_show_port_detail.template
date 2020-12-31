@@ -1,0 +1,26 @@
+Value Description (.*)
+Value Key Int (\S+)
+Value OperSpeed ((\d+\s+\S+)|(N/A))
+Value ConfigSpeed ((\d+\s+\S+)|(N/A))
+Value AdminState (\S+)
+Value OperDuplex (\S+)
+Value OperState (.*)
+Value ConfigDuplex (\S+)
+Value Mtu (\S+)
+Value Link (\S+)
+
+
+Start
+  ^={5,} -> Entries
+
+Entries
+  ^Description\s+:${Description}
+  ^Interface\s+:\s+${Int}\s+Oper\s+Speed\s+:\s+${OperSpeed}
+  ^Link-level\s+:\s+Ethernet\s+Config\s+Speed\s+:\s+${ConfigSpeed}
+  ^Admin\s+State\s+:\s+${AdminState}\s+Oper\s+Duplex\s+:\s+${OperDuplex}
+  ^Oper\s+State\s+:\s+${OperState}\s+Config\s+Duplex\s+:\s+${ConfigDuplex}
+  ^Physical\s+Link\s+:\s+${Link}\s+MTU\s+:\s+${Mtu} -> Record
+
+
+
+

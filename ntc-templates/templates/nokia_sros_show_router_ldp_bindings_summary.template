@@ -1,0 +1,34 @@
+Value Key IPv4_Prefix_Bindings (\d+)
+Value IPv6_Prefix_Bindings (\d+)
+Value IPv4_P2MP_Bindings (\d+)
+Value IPv6_P2MP_Bindings (\d+)
+Value In_Band_SSM_IPv4_P2MP_Bindings (\d+)
+Value In_Band_SSM_IPv6_P2MP_Bindings (\d+)
+Value In_Band_VPN_SSM_IPv4_P2MP_Bin (\d+)
+Value In_Band_VPN_SSM_IPv6_P2MP_Bin (\d+)
+Value Recursive_with_In_Band_SSM_IPv4 (\d+)
+Value Recursive_with_In_Band_SSM_IPv6 (\d+)
+Value Recursive_with_Generic_IPv4_P2M (\d+)
+Value Recursive_with_Generic_IPv6_P2M (\d+)
+Value GRT_Recursive_with_Generic_IPv4_P2MP_Bi (\d+)
+Value GRT_Recursive_with_Generic_IPv6_P2MP_Bi (\d+)
+Value VC_Labels (\d+)
+Value FEC_lab (\d+)
+
+Start 
+  ^ No. of IPv4 Prefix Bindings: ${IPv4_Prefix_Bindings}
+  ^ No. of IPv6 Prefix Bindings: ${IPv6_Prefix_Bindings}
+  ^ No. of Generic IPv4 P2MP Bindings: ${IPv4_P2MP_Bindings}
+  ^ No. of Generic IPv6 P2MP Bindings: ${IPv6_P2MP_Bindings}
+  ^ No. of In-Band-SSM IPv4 P2MP Bindings: ${In_Band_SSM_IPv4_P2MP_Bindings}
+  ^ No. of In-Band-SSM IPv6 P2MP Bindings: ${In_Band_SSM_IPv6_P2MP_Bindings}
+  ^ No. of In-Band-VPN-SSM IPv4 P2MP Bindings: ${In_Band_VPN_SSM_IPv4_P2MP_Bin}
+  ^ No. of In-Band-VPN-SSM IPv6 P2MP Bindings: ${In_Band_VPN_SSM_IPv6_P2MP_Bin}
+  ^ No. of Recursive with In-Band-SSM IPv4 P2MP Bindings: ${Recursive_with_In_Band_SSM_IPv4}
+  ^ No. of Recursive with In-Band-SSM IPv6 P2MP Bindings: ${Recursive_with_In_Band_SSM_IPv6}
+  ^ No. of VPN Recursive with Generic IPv4 P2MP Bindings: ${Recursive_with_Generic_IPv4_P2M}
+  ^ No. of VPN Recursive with Generic IPv6 P2MP Bindings: ${Recursive_with_Generic_IPv6_P2M}
+  ^ No. of GRT Recursive with Generic IPv4 P2MP Bindings: ${GRT_Recursive_with_Generic_IPv4_P2MP_Bi}
+  ^ No. of GRT Recursive with Generic IPv6 P2MP Binding: ${GRT_Recursive_with_Generic_IPv6_P2MP_Bi}
+  ^ No. of VC Labels: ${VC_Labels}
+  ^ No. of FEC 129s: ${FEC_lab} 

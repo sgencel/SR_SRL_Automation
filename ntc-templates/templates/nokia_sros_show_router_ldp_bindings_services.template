@@ -1,0 +1,22 @@
+Value Type (\S+)
+Value VCId (\d+)
+Value SDPId (\d+)
+Value LMTU (\d+)
+Value Key,Required Peer (\d+\.\d+\.\d+\.\d+:\d+)
+Value SvcId (\d+)
+Value IngLbl (\S+)
+Value RMTU (\d+|None)
+Value EgrLbl (\S+)
+
+Start
+  ^Type\s+VCId\s+SDPId\s+LMTU -> FourColumns
+  ^Type\s+VCId\s+SDPId\s+IngLbl\s+LMTU -> FiveColumns
+
+FourColumns
+  ^${Type}\s+${VCId}\s+${SDPId}\s+${LMTU}
+  ^${Peer}\s+${SvcId}\s+${IngLbl}\s+${RMTU}
+  ^\s{10}\s+${EgrLbl} -> Record
+
+FiveColumns
+  ^${Type}\s+${VCId}\s+${SDPId}\s+${IngLbl}\s+${LMTU}
+  ^${Peer}\s+${SvcId}\s+${EgrLbl}\s+${RMTU} -> Record

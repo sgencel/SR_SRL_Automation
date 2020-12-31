@@ -1,0 +1,13 @@
+Value Key IPAddress (\S+)
+Value MacAddress (\S+)
+Value SapSdpId (\S+)
+Value RemainingLeaseTime (\S+)
+Value LeaseOrigin (\S+)
+Value MCStdby (\S+)
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^${IPAddress}\s+${MacAddress}\s+${SapSdpId}\s+${RemainingLeaseTime}\s+${LeaseOrigin}(\s+${MCStdby})? -> Record
+  ^-{5,} -> EOF

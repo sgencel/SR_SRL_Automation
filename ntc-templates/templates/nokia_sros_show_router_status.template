@@ -1,0 +1,10 @@
+Value Key,Required Proto (.*?)
+Value Admin_state (.*?)
+Value Oper_state (.{2,})
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^\s?${Proto}\s{2,}${Admin_state}\s{2,}${Oper_state} -> Record
+

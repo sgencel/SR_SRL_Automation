@@ -1,0 +1,12 @@
+Value Key Name (.*?)
+Value Max_Allowed (.*?)
+Value Current_Size (\S+)
+Value MaxSoFar (\S+)
+Value In_Use (\S+)
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^${Name}\s{4,}${Max_Allowed}\s{4,}${Current_Size}\s+~?${MaxSoFar}\s+~?${In_Use} -> Record
+  ^-{5,} -> EOF

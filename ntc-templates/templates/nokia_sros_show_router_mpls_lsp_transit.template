@@ -1,0 +1,13 @@
+Value Key From (\d+\.\d+\.\d+\.\d+)
+Value Key To (\d+\.\d+\.\d+\.\d+)
+Value In_interface (\S+)
+Value Out_interface (\S+)
+Value State (\S+)
+Value Key LSP_Name (\S+)
+
+Start 
+  ^From -> Entries
+
+Entries
+  ^${From}\s+${To}\s+${In_interface}\s+${Out_interface}\s+${State} 
+  ^\s+${LSP_Name} -> Record

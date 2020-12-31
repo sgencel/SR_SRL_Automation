@@ -1,0 +1,7 @@
+Value TotalCount (\d+)
+
+Start
+  ^={5,}
+  ^Active Subscriber
+  ^={5,}
+  ^Total\s+Count\s+:\s+${TotalCount}

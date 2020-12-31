@@ -1,0 +1,13 @@
+Value Key Session_Id (.+?)
+Value To (\d+\.\d+\.\d+\.\d+)
+Value State (Up|Down)
+Value Protocol (\S+)
+
+Start
+  ^  Protocols -> Body
+
+
+Body 
+  ^${Session_Id}\s\s+${State}
+  ^  ${To} 
+  ^  ${Protocol} -> Record

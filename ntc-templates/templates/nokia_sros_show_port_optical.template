@@ -1,0 +1,94 @@
+Value TransceiverStatus (\S+)
+Value TransceiverType (\S+)
+Value ModelNumber (.*)
+Value TXLaserWavelength (\d+)
+Value NumberOfLanes (\d+)
+Value DiagCapable (\S+)
+Value ConnectorCode (\S+)
+Value VendorOUI (\S+)
+Value ManufactureDate (\S+)
+Value Media (\S+)
+Value SerialNumber (\S+)
+Value PartNumber (\S+)
+Value OpticalCompliance (\S+)
+Value LinkLengthsupport (\d+)
+Value SFP_SyncE_Capable (\w+)
+#
+Value Temperature ([+-]?\d+(\.\d+)?)
+Value TemperatureHighAlarm ([+-]?\d+(\.\d+)?)
+Value TemperatureHighWarning ([+-]?\d+(\.\d+)?)
+Value TemperatureLowWarning ([+-]?\d+(\.\d+)?)
+Value TemperatureLowAlarm ([+-]?\d+(\.\d+)?)
+#
+Value SupplyVoltage ([+-]?\d+(\.\d+)?)
+Value SupplyVoltageHighAlarm ([+-]?\d+(\.\d+)?)
+Value SupplyVoltageHighWarning ([+-]?\d+(\.\d+)?)
+Value SupplyVoltageLowWarning ([+-]?\d+(\.\d+)?)
+Value SupplyVoltageLowAlarm ([+-]?\d+(\.\d+)?)
+#
+Value List TxBiasCurrent ([+-]?\d+(\.\d+)?)
+Value TxBiasCurrentHighAlarm ([+-]?\d+(\.\d+)?)
+Value TxBiasCurrentHighWarning ([+-]?\d+(\.\d+)?)
+Value TxBiasCurrentLowWarning ([+-]?\d+(\.\d+)?)
+Value TxBiasCurrentLowAlarm ([+-]?\d+(\.\d+)?)
+#
+Value List TxOutputPower ([+-]?\d+(\.\d+)?)
+Value TxOutputPowerHighAlarm ([+-]?\d+(\.\d+)?)
+Value TxOutputPowerHighWarning ([+-]?\d+(\.\d+)?)
+Value TxOutputPowerLowWarning ([+-]?\d+(\.\d+)?)
+Value TxOutputPowerLowAlarm ([+-]?\d+(\.\d+)?)
+#
+Value List RxOpticalPwr ([+-]?\d+(\.\d+)?)
+Value RxOpticalPwrHighAlarm ([+-]?\d+(\.\d+)?)
+Value RxOpticalPwrHighWarning ([+-]?\d+(\.\d+)?)
+Value RxOpticalPwrLowWarning ([+-]?\d+(\.\d+)?)
+Value RxOpticalPwrLowAlarm ([+-]?\d+(\.\d+)?)
+#
+Value List LineTemperature (\S+)
+Value LineTemperatureHighAlarm ([+-]?\d+(\.\d+)?)
+Value LineTemperatureHighWarning ([+-]?\d+(\.\d+)?)
+Value LineTemperatureLowWarning ([+-]?\d+(\.\d+)?)
+Value LineTemperatureLowAlarm ([+-]?\d+(\.\d+)?)
+
+Start
+  # Change state for 4 line Transceiver Type
+  ^Transceiver Type   : QSFP28 -> FourLines
+  ^Transceiver Type   : CFP4 -> FourLines
+  # Default ruleset
+  ^Transceiver Status\s*:\s*${TransceiverStatus}
+  ^Transceiver Type\s*:\s*${TransceiverType}
+  ^Model Number\s*:\s*${ModelNumber}
+  ^TX Laser Wavelength\s*:\s*${TXLaserWavelength}.*?Diag Capable\s*:\s*${DiagCapable}
+  ^Connector Code\s*:\s*${ConnectorCode}\s+Vendor OUI\s*:\s*${VendorOUI}
+  ^Manufacture date\s*:\s*${ManufactureDate}\s+Media\s*:\s*${Media}
+  ^Serial Number\s*:\s*${SerialNumber}
+  ^Part Number\s*:\s*${PartNumber}
+  ^Optical Compliance\s*:\s*${OpticalCompliance}
+  ^Link Length support\s*:\s*${LinkLengthsupport}
+  ^SFP Sync-E Capable\s*:\s*${SFP_SyncE_Capable}
+  ^Temperature.*?${Temperature}\s+${TemperatureHighAlarm}!?\s+${TemperatureHighWarning}!?\s+${TemperatureLowWarning}!?\s+${TemperatureLowAlarm}!?
+  ^Supply Voltage.*?${SupplyVoltage}\s+${SupplyVoltageHighAlarm}!?\s+${SupplyVoltageHighWarning}!?\s+${SupplyVoltageLowWarning}!?\s+${SupplyVoltageLowAlarm}!?
+  ^Tx Bias Current.*?${TxBiasCurrent}\s+${TxBiasCurrentHighAlarm}!?\s+${TxBiasCurrentHighWarning}!?\s+${TxBiasCurrentLowWarning}!?\s+${TxBiasCurrentLowAlarm}!?
+  ^Tx Output Power.*?${TxOutputPower}\s+${TxOutputPowerHighAlarm}!?\s+${TxOutputPowerHighWarning}!?\s+${TxOutputPowerLowWarning}!?\s+${TxOutputPowerLowAlarm}!?
+  ^Rx Optical Power.*?${RxOpticalPwr}\s+${RxOpticalPwrHighAlarm}!?\s+${RxOpticalPwrHighWarning}!?\s+${RxOpticalPwrLowWarning}!?\s+${RxOpticalPwrLowAlarm}!?
+
+FourLines
+  ^Transceiver Status\s*:\s*${TransceiverStatus}
+  ^Transceiver Type\s*:\s*${TransceiverType}
+  ^Model Number\s*:\s*${ModelNumber}
+  ^TX Laser Wavelength\s*:\s*${TXLaserWavelength}.*?Diag Capable\s*:\s*${DiagCapable}
+  ^Number of Lanes\s*:\s*${NumberOfLanes}
+  ^Connector Code\s*:\s*${ConnectorCode}\s+Vendor OUI\s*:\s*${VendorOUI}
+  ^Manufacture date\s*:\s*${ManufactureDate}\s+Media\s*:\s*${Media}
+  ^Serial Number\s*:\s*${SerialNumber}
+  ^Part Number\s*:\s*${PartNumber}
+  ^Optical Compliance\s*:\s*${OpticalCompliance}
+  ^Link Length support\s*:\s*${LinkLengthsupport}
+  ^SFP Sync-E Capable\s*:\s*${SFP_SyncE_Capable}
+  ^Temperature.*?${Temperature}\s+${TemperatureHighAlarm}!?\s+${TemperatureHighWarning}!?\s+${TemperatureLowWarning}!?\s+${TemperatureLowAlarm}!?
+  ^Supply Voltage.*?${SupplyVoltage}\s+${SupplyVoltageHighAlarm}!?\s+${SupplyVoltageHighWarning}!?\s+${SupplyVoltageLowWarning}!?\s+${SupplyVoltageLowAlarm}!?
+  ^Lane Tx Bias Current.*?${TxBiasCurrentHighAlarm}!?\s+${TxBiasCurrentHighWarning}!?\s+${TxBiasCurrentLowWarning}!?\s+${TxBiasCurrentLowAlarm}!?
+  ^Lane Tx Output Power.*?${TxOutputPowerHighAlarm}!?\s+${TxOutputPowerHighWarning}!?\s+${TxOutputPowerLowWarning}!?\s+${TxOutputPowerLowAlarm}!?
+  ^Lane Rx Optical Pwr.*?\s+${RxOpticalPwrHighAlarm}!?\s+${RxOpticalPwrHighWarning}!?\s+${RxOpticalPwrLowWarning}!?\s+${RxOpticalPwrLowAlarm}!?
+  ^Lane Temperature.*?\s+${LineTemperatureHighAlarm}!?\s+${LineTemperatureHighWarning}!?\s+${LineTemperatureLowWarning}!?\s+${LineTemperatureLowAlarm}!?
+  ^\s+\d+\s+${LineTemperature}\s+${TxBiasCurrent}\s+${TxOutputPower}\s+\s+${RxOpticalPwr}

@@ -1,0 +1,14 @@
+Value Key Index (\d+)
+Value Date (\d+\/\d+\/\d+\s\d+:\d+:\d+.\d+)
+Value Severity (\S+)
+Value Alarm (\S+)
+Value Resource (.*)
+Value Details (.*)
+
+
+Start
+  ^-{4,} -> Entry
+
+Entry
+  ^${Index}\s+${Date}\s+${Severity}\s+${Alarm}\s+${Resource}
+  ^\s+${Details} -> Record

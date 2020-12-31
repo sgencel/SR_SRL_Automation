@@ -1,0 +1,26 @@
+Value Key InterfaceName (.{30})
+Value AdminState (Up|Down)
+Value OperStatev4 (Up|Down)
+Value OprvStatev6 (Up|Down)
+Value Type (.{7})
+Value PortSapId (.*)
+Value List IPAddress (\S+)
+Value List PfxState (n/a|PREFERRED)
+
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^[\S]+ -> Continue.Record
+  ^${InterfaceName}\s+${AdminState}\s+${OperStatev4}/${OprvStatev6}\s+${Type}\s+${PortSapId}
+  ^\s{3}${IPAddress}\s+${PfxState}
+
+
+
+
+
+
+
+
+

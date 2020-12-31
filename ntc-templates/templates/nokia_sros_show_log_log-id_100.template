@@ -1,0 +1,13 @@
+Value Key Index (\d+)
+Value Key Date (\d+\/\d+\/\d+\s\d+:\d+:\d+.\d+\s\S+)
+Value Severity (\S+)
+Value Alarm (.*)
+Value Key Details (.*)
+
+
+Start
+  ^Event Log -> Entry
+
+Entry
+  ^${Index}\s+${Date}\s+${Severity}:\s+${Alarm}
+  ^"${Details}" -> Record

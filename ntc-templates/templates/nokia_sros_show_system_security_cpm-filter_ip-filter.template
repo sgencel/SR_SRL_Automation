@@ -1,0 +1,10 @@
+Value Key Id (\d+)
+Value Dropped (\d+)
+Value Forwarded (\d+)
+Value Required Description (.*)
+
+Start
+  ^Id -> Entry
+
+Entry
+  ^${Id}\s+${Dropped}\s+${Forwarded}\s+${Description} -> Record Entry

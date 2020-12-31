@@ -1,0 +1,10 @@
+Value Required,Key NEIGHBOR (\d+\.\d+\.\d+\.\d+)
+Value INTERFACE (\S+)
+Value HELLO (\S+)
+Value Change (\d+d)
+
+Start 
+  ^Neighbor -> Entries
+
+Entries
+  ^${NEIGHBOR}\s+${INTERFACE}\s+${HELLO}\s{2,}${Change}\s+\d+:\d+:\d+ -> Record

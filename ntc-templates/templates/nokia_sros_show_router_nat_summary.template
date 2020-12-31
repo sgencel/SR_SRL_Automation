@@ -1,0 +1,21 @@
+Value AdminState (\S+)
+Value AttributeVendor (\S+)
+Value AttributeType (\S+)
+Value Description (.*)
+Value DropUnidentifiedTraffic (\S+)
+Value RadiusProxyServerRouter (.*)
+Value RadiusProxyServerName (.*)
+Value LastManagementChange (.*)
+
+Start
+  ^={5,}
+  ^Subscriber
+  ^={5,}
+  ^Admin\s+state\s+:\s+${AdminState}
+  ^Attribute\s+vendor\s+:\s+${AttributeVendor}
+  ^Attribute\s+type\s+:\s+${AttributeType}
+  ^Description\s+:\s+${Description}
+  ^Drop\s+unidentified\s+traffic\s+:\s+${DropUnidentifiedTraffic}
+  ^Radius\s+proxy\s+server\s+router\s+:\s+${RadiusProxyServerRouter}
+  ^Radius\s+proxy\s+server\s+name\s+:\s+${RadiusProxyServerName}
+  ^Last\s+management\s+change\s+:\s+${LastManagementChange}

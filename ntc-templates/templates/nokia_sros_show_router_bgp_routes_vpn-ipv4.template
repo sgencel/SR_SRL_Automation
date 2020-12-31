@@ -1,0 +1,14 @@
+Value Flag (\S+)
+Value Key,Required Network (\d+:\d+:\S+/\d+)
+Value LocalPref (\d+)
+Value MED (\d+|None)
+Value Nexthop (\S+)
+Value PathId (\d+|None)
+Value Label (\d+)
+Value AsPath (^\s+\d+(\s\d+){0,}\s+$|No As-Path)
+
+Start
+  ^\S+\s+\d+:\d+:\S+/\d+ -> Continue.Record
+  ^${Flag}\s+${Network}\s+${LocalPref}\s+${MED}
+  ^\s+${Nexthop}\s+${PathId}\s+${Label}
+  ^\s+${AsPath}

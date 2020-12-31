@@ -1,0 +1,14 @@
+Value Key,Filldown LAG_ID (\d+)
+Value Filldown State (\S+)
+Value port (\S+)
+Value ADMIN ((?i)up|down)
+Value LINK (\S+)
+Value OPER (\S+(\s\S+)?)
+Value Primary (\S+)
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^(?i)${LAG_ID}\((${State})\)\s+${port}\s+${ADMIN}\s+${LINK}\s+${OPER}\s+${Primary} -> Record
+  ^\s+${port}\s+${ADMIN}\s+${LINK}\s+${OPER} -> Record

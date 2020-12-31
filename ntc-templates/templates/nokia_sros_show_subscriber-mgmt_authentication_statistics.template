@@ -1,0 +1,11 @@
+Value Key PolicyName (.{32})
+Value SubscrPktsAuthenticated (\d+)
+Value SubscrPktsRejected (\d+)
+Value SubscrPktsRejectedSendFailed (\d+)
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^${PolicyName}\s+${SubscrPktsAuthenticated}\s+${SubscrPktsRejected}\s+${SubscrPktsRejectedSendFailed} -> Record
+

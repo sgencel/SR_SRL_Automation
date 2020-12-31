@@ -1,0 +1,21 @@
+Value Filldown,Key LSP_Name (\S+)
+Value Key Path_name (.*)
+Value Filldown To (\d+\.\d+\.\d+\.\d+)
+Value Next_Hop (\d+\.\d+\.\d+\.\d+|n/a)
+Value Filldown Admin_State (Up|Dwn)
+Value Filldown Oper_State (Up|Dwn)
+Value Path_Admin (Up|Dwn)
+Value Path_Oper (Up|Dwn)
+Value Type (\S+)
+Value Out_Int (\S+|n/a)
+
+Start
+  ^LSP Name -> Body
+
+
+Body 
+  ^LSP Name         : ${LSP_Name}
+  ^To               : ${To}
+  ^Adm State\s+:\s+${Admin_State}\s+Oper State\s+:\s+${Oper_State}
+  ^${Path_name}\s+${Next_Hop}\s+${Type}\s+${Out_Int}\s+${Path_Admin}\s+${Path_Oper} -> Record
+  

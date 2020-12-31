@@ -1,0 +1,15 @@
+Value Key,Required Prefix (\d+\.\d+\.\d+\.\d+)
+Value Admin (Up|Dwn)
+Value Oper (Up|Dwn)
+Value Hello (\d+)
+Value Hold (\d+)
+Value KA_Fctr (\d+)
+Value KA_Time (\d+)
+Value Auto_Created (\S+)
+
+
+Start
+  ^-{5,} -> Body
+
+Body
+  ^${Prefix}\s+${Admin}/${Oper}\s+${Hello}\s+${Hold}\s+${KA_Fctr}\s+${KA_Time}\s+${Auto_Created} -> Record

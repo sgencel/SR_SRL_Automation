@@ -1,0 +1,86 @@
+Value Required,Key ADMIN (Up|Down)
+Value OPER (Up|Down)
+Value v4_ADMIN (Up|Down)
+Value v4_OPER (Up|Down)
+Value BSR_STATE (.*)
+# E_BSR
+Value E_BSR_add (\S+)
+Value E_BSR_Expiry (\S+)
+Value E_BSR_Priority (\S+)
+Value E_BSR_Hash (\S+)
+Value E_BSR_Up (\S+)
+Value E_BSR_RPF (\S+)
+# C_BSR
+Value C_BSR_Admin (Up|Down)
+Value C_BSR_Oper (Up|Down) 
+Value C_BSR_Address (\S+)   
+Value C_BSR_Priority (\d+)  
+Value C_BSR_Hash (\d+) 
+# C_RP
+Value C_RP_Admin (Up|Down)
+Value C_RP_Oper (Up|Down) 
+Value C_RP_Address (\d+.\d+.\d+.\d+)   
+Value C_RP_Priority (\d+)  
+Value C_RP_Holdtime (\d+) 
+# All
+Value Auto_RP (Enabled|Disabled)
+Value Multicast_Fast_Failover (Enabled|Disabled)
+Value SSM_Default_Range (Enabled|Disabled)               
+Value SSM_Assert_Comp_Mode (Enabled|Disabled)            
+Value MC_ECMP_Hashing (Enabled|Disabled)                
+Value MC_ECMP_Hashing_Rebalance (Enabled|Disabled)       
+Value Enable_MDT_SPT (Enabled|Disabled)                  
+Value Policy (.*)                         
+Value RPF_Table (.*)                       
+Value Non_DR_Attract_Traffic (Enabled|Disabled)          
+Value Bgp_Next_hop_override (Enabled|Disabled)           
+Value Rpf_Vector (\S+)                      
+Value ESM (Enabled|Disabled)                             
+Value SSM_scaling (Enabled|Disabled)    
+
+Start
+  ^Admin State                       : ${ADMIN}
+  ^Oper State                        : ${OPER}
+  ^IPv4 Admin State                  : ${v4_ADMIN}
+  ^IPv4 Oper State                   : ${v4_OPER}
+  ^BSR State                         : ${BSR_STATE}
+  ^Elected BSR -> E_BSR
+  ^Candidate BSR -> C_BSR
+  ^Candidate RP -> C_RP
+  ^Auto-RP                           : ${Auto_RP}
+  ^Multicast-Fast-Failover           : ${Multicast_Fast_Failover}
+  ^SSM-Default-Range                 : ${SSM_Default_Range}
+  ^SSM-Assert-Comp-Mode              : ${SSM_Assert_Comp_Mode}
+  ^MC-ECMP-Hashing                   : ${MC_ECMP_Hashing}
+  ^MC-ECMP-Hashing-Rebalance         : ${MC_ECMP_Hashing_Rebalance}
+  ^Enable-MDT-SPT                    : ${Enable_MDT_SPT}
+  ^Policy                            : ${Policy}
+  ^RPF Table                         : ${RPF_Table}
+  ^Non-DR-Attract-Traffic            : ${Non_DR_Attract_Traffic}
+  ^Bgp Next-hop override             : ${Bgp_Next_hop_override}
+  ^Rpf-Vector                        : ${Rpf_Vector}
+  ^ESM                               : ${ESM}
+  ^SSM S\,G Scaling \(upto 256K\)       : ${SSM_scaling}
+ 
+E_BSR
+  ^    Address                       : ${E_BSR_add}
+  ^    Expiry Time                   : ${E_BSR_Expiry}
+  ^    Priority                      : ${E_BSR_Priority}
+  ^    Hash Mask Length              : ${E_BSR_Hash}
+  ^    Up Time                       : ${E_BSR_Up}
+  ^    RPF Intf towards E-BSR        : ${E_BSR_RPF} -> Start
+
+C_BSR
+  ^    Admin State                   : ${C_BSR_Admin}
+  ^    Oper State                    : ${C_BSR_Oper}
+  ^    Address                       : ${C_BSR_Address}
+  ^    Priority                      : ${C_BSR_Priority}
+  ^    Hash Mask Length              : ${C_BSR_Hash} -> Start
+
+C_RP
+  ^    Admin State                   : ${C_RP_Admin}
+  ^    Oper State                    : ${C_RP_Oper}
+  ^    Address                       : ${C_RP_Address}
+  ^    Priority                      : ${C_RP_Priority}
+  ^    Holdtime                      : ${C_RP_Holdtime} -> Start
+

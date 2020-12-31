@@ -1,0 +1,15 @@
+Value Key Slot (\d+)
+Value Provisioned_Type (\S+)
+Value Admin_State (\S+)
+Value Oper_State (\S+)
+Value List Atrribs (.*?:.*)
+
+
+Start
+  ^-{10,} -> Cards
+
+Cards
+  ^${Slot}\s+${Provisioned_Type}\s+${Admin_State}\s+${Oper_State} -> Atrrib_sec
+
+Atrrib_sec
+  ^\s+${Atrribs}

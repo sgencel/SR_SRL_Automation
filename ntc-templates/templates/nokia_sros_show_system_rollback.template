@@ -1,0 +1,14 @@
+Value Idx (\d+|\w+)
+Value Suffix (\S+)
+Value CreationTime (\d+/\d+/\d+ \d+:\d+:\d+ \w+)
+Value Release (\S+)
+Value User (\w+)
+Value Comment (.*)
+
+Start
+  ^-{5,} -> Files
+
+Files
+  ^\d+|\w+\s+\S+\s+\d+/\d+/\d+ -> Continue.Record
+  ^${Idx}\s+${Suffix}\s+${CreationTime}\s+${Release}\s+${User}
+  ^\s+${Comment}

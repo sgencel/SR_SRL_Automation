@@ -1,0 +1,12 @@
+Value Key,Required Service_Id (\d+)
+Value Table_Size (\d+)
+Value Allocated (\d+)
+
+
+Start
+  ^Forwarding  -> Body
+
+Body
+  ^Service Id        : ${Service_Id} 
+  ^Table Size        : ${Table_Size}\s+ Allocated Count   : ${Allocated} -> Record
+  ^Total Service -> EOF

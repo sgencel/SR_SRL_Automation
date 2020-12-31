@@ -1,0 +1,9 @@
+Value Lcl_Port (\S+)
+Value Scope (\S+)
+Value Remote_Chassis_ID (\S+)
+Value Index (\d+)
+Value Remote_Port (\S+)
+Value Remote_Sys_Name (.*)
+
+Start
+  ^${Lcl_Port}\s+${Scope}\s+${Remote_Chassis_ID}\s+${Index}\s+${Remote_Port}\s+${Remote_Sys_Name}$$ -> Record

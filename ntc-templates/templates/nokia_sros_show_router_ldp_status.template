@@ -1,0 +1,16 @@
+Value Key LSRID_v4 (\d+\.\d+\.\d+\.\d+)
+Value LSRID_v6 (.*)
+Value Last_Change (\S+)
+Value Admin_State (Up|Down)
+Value v4_Oper_State (Up|Down)
+Value v6_Oper_State (Up|Down)
+Value v4_Down_event (\S+)
+Value v6_Down_event (\S+)
+
+Start
+  ^LDP.*\s${LSRID_v4}
+  ^\s{5,}IPv6 LSR ID\s${LSRID_v6}
+  ^Last Change        : ${Last_Change}
+  ^Admin State        : ${Admin_State}
+  ^IPv4 Oper State    : ${v4_Oper_State}\s{3,}IPv6 Oper State      : ${v6_Oper_State}
+  ^IPv4 Oper Down Eve.*: ${v4_Down_event}\s{3,}IPv6 Oper Down Events: ${v6_Down_event}

@@ -1,0 +1,12 @@
+Value Key InterfaceNameSapIdSdp (.{32})
+Value ArpPopulate (\S+)
+Value LeasesPerInterface (\d+)
+Value PerSapLimit (\d+)
+Value InfoOption (\S+)
+Value AdminState (\S+)
+
+Start
+  ^-{5,} -> Entries
+
+Entries
+  ^${InterfaceNameSapIdSdp}\s+${ArpPopulate}\s+${LeasesPerInterface}/${PerSapLimit}\s+${InfoOption}\s+${AdminState} -> Record
