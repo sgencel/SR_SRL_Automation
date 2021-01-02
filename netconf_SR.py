@@ -106,6 +106,36 @@ def parse_card_errors(args):
     return(all_data)
 
 
+
+def parse_ipv4_unicast_stats(args):
+    all_data = {}
+    ipv4_unicast = ''' <state xmlns="urn:nokia.com:sros:ns:yang:sr:state">
+            <router>
+            <route-table>
+            <unicast>
+            <ipv4>
+            <statistics>
+            </statistics>
+            </ipv4>
+            </unicast>
+            </route-table>
+            </router>
+          </state>
+    '''
+
+
+    for host in args:
+        with manager.connect(host=host, port=830,
+                     username="admin", hostkey_verify=False, password="Alcateldc",
+                     device_params={'name': 'alu'}) as m:
+            get_reply = m.get(("subtree", ipv4_unicast))
+            mydict = xmltodict.parse(str(get_reply),dict_constructor=dict)
+            mydict_only_port = mydict['rpc-reply']['data']['state']['router']
+            all_data[host] = mydict_only_port
+
+    return(all_data)
+
+
 def parse_bgp_info(args):
     all_data = {}
     bgp_info = ''' <state xmlns="urn:nokia.com:sros:ns:yang:sr:state">
@@ -193,7 +223,7 @@ def parse_port_error_last_1min(args):
     return (error_data)
 if __name__ == "__main__":
     host_ip = ['172.29.12.75']
-    print(parse_card_errors(host_ip))
+    print(parse_ipv4_unicast_stats(host_ip))
 
 
 
