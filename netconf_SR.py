@@ -28,6 +28,30 @@ def parse_port_stats(args):
     return(all_data)
 
 
+def parse_cpm_cpu_number(args):
+    all_data = {}
+    cpu_num = ''' <state xmlns="urn:nokia.com:sros:ns:yang:sr:state">
+            <cpm>
+
+                    <number-of-cpus/>
+            </cpm>
+          </state>
+    '''
+
+
+
+    for host in args:
+        with manager.connect(host=host, port=830,
+                     username="admin", hostkey_verify=False, password="Alcateldc",
+                     device_params={'name': 'alu'}) as m:
+            get_reply = m.get(("subtree", cpu_num))
+            mydict = xmltodict.parse(str(get_reply),dict_constructor=dict)
+            mydict_only_port = mydict['rpc-reply']['data']['state']['cpm']
+            all_data[host] = mydict_only_port
+
+    return(all_data)
+
+
 
 
 def parse_card_state(args):
@@ -52,6 +76,29 @@ def parse_card_state(args):
                      username="admin", hostkey_verify=False, password="Alcateldc",
                      device_params={'name': 'alu'}) as m:
             get_reply = m.get(("subtree", card_state))
+            mydict = xmltodict.parse(str(get_reply),dict_constructor=dict)
+            mydict_only_port = mydict['rpc-reply']['data']['state']['card']
+            all_data[host] = mydict_only_port
+
+    return(all_data)
+
+def parse_card_errors(args):
+    all_data = {}
+    card_errors = ''' <state xmlns="urn:nokia.com:sros:ns:yang:sr:state">
+            <card>
+            <fp>
+            <statistics></statistics>
+            </fp>
+            </card>
+          </state>
+    '''
+
+
+    for host in args:
+        with manager.connect(host=host, port=830,
+                     username="admin", hostkey_verify=False, password="Alcateldc",
+                     device_params={'name': 'alu'}) as m:
+            get_reply = m.get(("subtree", card_errors))
             mydict = xmltodict.parse(str(get_reply),dict_constructor=dict)
             mydict_only_port = mydict['rpc-reply']['data']['state']['card']
             all_data[host] = mydict_only_port
@@ -145,7 +192,8 @@ def parse_port_error_last_1min(args):
         error_data[host] =port_list
     return (error_data)
 if __name__ == "__main__":
-    host_ip = ['172.29.12.90', '172.29.12.75', '172.29.12.77']
-    print(parse_port_error_last_1min(host_ip))
+    host_ip = ['172.29.12.75']
+    print(parse_card_errors(host_ip))
+
 
 
