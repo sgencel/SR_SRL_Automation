@@ -64,6 +64,7 @@ def parse_show_card_manual(args):
 
 
 def parse_show_port(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -93,9 +94,11 @@ def parse_show_port(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        for port_list in output:
-            print (port_list['port_id'] + "     " + port_list['admin_state'])
+        all_data[i] = output
+    return(all_data)
+
 def parse_show_card(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -125,9 +128,11 @@ def parse_show_card(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        print(output[0])
+        all_data[i] = output
+    return(all_data)
 
 def parse_show_version(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -157,11 +162,12 @@ def parse_show_version(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        for version_info in output:
-            print(version_info)
+        all_data[i] = output
+    return(all_data)
 
 
 def parse_show_bof(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -191,10 +197,11 @@ def parse_show_bof(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        for bof_info in output:
-            print(bof_info)
+        all_data[i] = output
+    return(all_data)
 
 def parse_show_router_interface(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -224,11 +231,12 @@ def parse_show_router_interface(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        for router_interface_info in output:
-            print(router_interface_info)
+        all_data[i] = output
+    return(all_data)
 
 
 def parse_show_mda(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -258,10 +266,11 @@ def parse_show_mda(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        for mda_info in output:
-            print(mda_info)
+        all_data[i] = output
+    return(all_data)
 
 def parse_log99(args):
+    all_data = {}
     os.environ['NET_TEXTFSM'] = 'C:\\Users\sgancel\\ntc-templates\\templates'
     for i in args:
         sros = {
@@ -291,9 +300,9 @@ def parse_log99(args):
         except unknown_error:
             print('Some other error: ' + str(unknown_error))
             continue
-        for log99_info in output:
-            print(log99_info)
+        all_data[i] = output
+    return(all_data)
 
 if __name__ == "__main__":
     host_ip = ['172.29.12.90', '172.29.12.75']
-    parse_show_router_interface(host_ip)
+    print(parse_log99(host_ip))

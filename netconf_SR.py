@@ -136,8 +136,33 @@ def parse_ipv4_unicast_stats(args):
     return(all_data)
 
 
-def parse_bgp_info(args):
+def parse_system_connections(args):
     all_data = {}
+    system_connections = ''' <state xmlns="urn:nokia.com:sros:ns:yang:sr:state">
+            <system>
+            <connections>
+            <statistics>
+            </statistics>
+            </connections>
+            </system>
+          </state>
+    '''
+
+
+    for host in args:
+        with manager.connect(host=host, port=830,
+                     username="admin", hostkey_verify=False, password="Alcateldc",
+                     device_params={'name': 'alu'}) as m:
+            get_reply = m.get(("subtree", system_connections))
+            mydict = xmltodict.parse(str(get_reply),dict_constructor=dict)
+            mydict_only_port = mydict['rpc-reply']['data']['state']['system']
+            all_data[host] = mydict_only_port
+
+    return(all_data)
+
+
+def parse_bgp_info(args):
+    all_data = []
     bgp_info = ''' <state xmlns="urn:nokia.com:sros:ns:yang:sr:state">
             <router>
                     <bgp>
@@ -163,10 +188,10 @@ def parse_bgp_info(args):
                      device_params={'name': 'alu'}) as m:
             get_reply = m.get(("subtree", bgp_info))
             mydict = xmltodict.parse(str(get_reply),dict_constructor=dict)
-            mydict_only_port = mydict['rpc-reply']['data']['state']['router']
-            all_data[host] = mydict_only_port
-
-    return(all_data)
+            mydict_only_data = mydict['rpc-reply']['data']['state']['router']
+            mydict_only_data["host"] = host
+            all_data.append(mydict_only_data)
+    return(all_data[1])
 
 def parse_port_error_last_1min(args):
     all_data_initial = {}
@@ -222,8 +247,8 @@ def parse_port_error_last_1min(args):
         error_data[host] =port_list
     return (error_data)
 if __name__ == "__main__":
-    host_ip = ['172.29.12.75']
-    print(parse_ipv4_unicast_stats(host_ip))
+    host_ip = ['172.29.12.75', '172.29.12.90']
+    print(parse_bgp_info(host_ip))
 
 
 
